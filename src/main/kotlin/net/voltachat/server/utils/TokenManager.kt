@@ -3,7 +3,7 @@ package net.voltachat.server.utils
 import com.auth0.jwt.JWT
 import com.auth0.jwt.JWTVerifier
 import com.auth0.jwt.algorithms.Algorithm
-import io.ktor.config.*
+import io.ktor.server.config.*
 import net.voltachat.server.models.user.User
 import java.util.Date
 

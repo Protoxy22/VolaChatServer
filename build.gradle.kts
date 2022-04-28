@@ -2,37 +2,27 @@ group = "net.volachat.server"
 version = "1.0.0"
 
 plugins {
-    val kotlinVersion = "1.5.31"
-    kotlin("jvm") version kotlinVersion
     application
+    kotlin("jvm") version "1.6.21"
 }
 
-val ktorVersion = "1.6.7"
+
+val ktor_version: String by project
+val logback_version: String by project
 
 dependencies {
     //Standard libraries
     implementation(kotlin("stdlib"))
 
-    //Ktor Network, for TCP networking server/client
-    implementation("io.ktor:ktor-network:2.0.0")
-    implementation("io.ktor:ktor-network-tls:2.0.0")
-
-    // Gson
-    implementation("io.ktor:ktor-gson:$ktorVersion")
-
-    implementation("io.ktor:ktor-server-core:$ktorVersion")
-    implementation( "io.ktor:ktor-server-netty:$ktorVersion")
-    implementation ("io.ktor:ktor-serialization:$ktorVersion")
-    implementation("io.ktor:ktor-server-sessions:$ktorVersion")
-
-    implementation("io.ktor:ktor-gson:$ktorVersion")
-
-    //JWT
-    implementation("io.ktor:ktor-auth:$ktorVersion")
-    implementation("io.ktor:ktor-auth-jwt:$ktorVersion")
-
-    implementation("io.ktor:ktor-jackson:$ktorVersion")
-
+    implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
+    implementation("io.ktor:ktor-server-websockets-jvm:$ktor_version")
+    implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktor_version")
+    implementation("io.ktor:ktor-serialization-gson-jvm:$ktor_version")
+    implementation("io.ktor:ktor-server-auth-jvm:$ktor_version")
+    implementation("io.ktor:ktor-server-auth-jwt-jvm:$ktor_version")
+    implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
+    implementation("ch.qos.logback:logback-classic:$logback_version")
+    testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
 }
 
 repositories {
@@ -52,4 +42,6 @@ tasks.jar {
 
 application {
     mainClass.set("net.voltachat.server.MainKt")
+    val isDevelopment: Boolean = project.ext.has("development")
+    applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
 }
