@@ -7,6 +7,7 @@ plugins {
     application
 }
 
+val ktorVersion = "1.6.7"
 
 dependencies {
     //Standard libraries
@@ -15,6 +16,23 @@ dependencies {
     //Ktor Network, for TCP networking server/client
     implementation("io.ktor:ktor-network:2.0.0")
     implementation("io.ktor:ktor-network-tls:2.0.0")
+
+    // Gson
+    implementation("io.ktor:ktor-gson:$ktorVersion")
+
+    implementation("io.ktor:ktor-server-core:$ktorVersion")
+    implementation( "io.ktor:ktor-server-netty:$ktorVersion")
+    implementation ("io.ktor:ktor-serialization:$ktorVersion")
+    implementation("io.ktor:ktor-server-sessions:$ktorVersion")
+
+    implementation("io.ktor:ktor-gson:$ktorVersion")
+
+    //JWT
+    implementation("io.ktor:ktor-auth:$ktorVersion")
+    implementation("io.ktor:ktor-auth-jwt:$ktorVersion")
+
+    implementation("io.ktor:ktor-jackson:$ktorVersion")
+
 }
 
 repositories {
@@ -33,5 +51,5 @@ tasks.jar {
 }
 
 application {
-    mainClass.set("net.voltachat.server.VoltaChatServerKt")
+    mainClass.set("net.voltachat.server.MainKt")
 }
