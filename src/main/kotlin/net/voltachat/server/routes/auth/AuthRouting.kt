@@ -41,7 +41,7 @@ fun Application.authRouting() {
             if(userManager.attemptLogin(username, password)) {
                 val token = tokenManager.generateToken(user)
                 val response = TokenResponse(username = username, accessToken = token, expiresIn = tokenManager.expirationDate)
-                call.respond(status = HttpStatusCode.OK, message = response)
+                call.respond(response)
             } else {
                 call.respond(status = HttpStatusCode.Unauthorized, message = "Bad login")
             }
