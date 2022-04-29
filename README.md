@@ -1,6 +1,9 @@
 # VolaChatServer
 VolaChat [Server] - Communication system 
 
+VolaChatClient:
+- https://github.com/Protoxy22/VolaChat
+
 Langage used:
 - Kotlin
 
