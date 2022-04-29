@@ -22,7 +22,9 @@ dependencies {
     implementation("io.ktor:ktor-server-auth-jwt-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")
-    testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
+    implementation("io.ktor:ktor-serialization-jackson:$ktor_version")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.2.2")
+    implementation("commons-codec:commons-codec:1.15")
 }
 
 repositories {
