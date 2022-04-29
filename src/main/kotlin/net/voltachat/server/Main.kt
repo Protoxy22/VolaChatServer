@@ -9,8 +9,11 @@ import io.ktor.server.config.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.server.plugins.contentnegotiation.*
+import io.ktor.server.websocket.*
+import net.voltachat.server.routes.chat.chatRouting
 import net.voltachat.server.utils.TokenManager
 import routes.profile.simpleAuthRouting
+import java.time.Duration
 
 
 fun main() {
@@ -30,10 +33,19 @@ fun main() {
                 }
             }
         }
+
+        install(WebSockets) {
+            pingPeriod = Duration.ofSeconds(15)
+            timeout = Duration.ofSeconds(15)
+            maxFrameSize = Long.MAX_VALUE
+            masking = false
+        }
+
         install(ContentNegotiation) {
             gson()
         }
 
         simpleAuthRouting()
+        chatRouting()
     }.start(wait = true)
 }

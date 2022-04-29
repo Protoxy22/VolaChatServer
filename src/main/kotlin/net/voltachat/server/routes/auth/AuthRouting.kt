@@ -25,8 +25,12 @@ fun Application.authRouting() {
             val user = call.receive<UserCredentials>()
             val username = user.username
             val password = user.password
-            userManager.userList.add(User(username, password))
-            call.respond(status = HttpStatusCode.OK, message = "Ok")
+
+            if(userManager.attemptRegister(username, password)) {
+                call.respond(status = HttpStatusCode.OK, message = "Ok")
+            } else {
+                call.respond(status = HttpStatusCode.Unauthorized, message = "Error registering")
+            }
         }
 
         post("/login") {
